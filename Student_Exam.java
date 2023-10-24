@@ -21,14 +21,18 @@ public class Student_Exam {
         return examID;
     }
 
+    public String getStudentID() {
+        return studentID;
+    }
+
     public void setExamID(String examID) {
         this.examID = examID;
     }
 
-    public void setStudentID(Student other){
+    public void setStudentID(Student other) {
         this.studentID = other.id;
     }
-    
+
     public void input() {
         System.out.print("Input Exam ID: ");
         Scanner scanner = new Scanner(System.in);
