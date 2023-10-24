@@ -36,7 +36,7 @@ public class Student_Exam {
     }
 
     public void output() {
-        System.out.println("\nExam ID: changedddgitdd" + examID);
+        System.out.println("\nExam ID: " + examID);
     }
 
 }
