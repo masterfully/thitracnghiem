@@ -62,7 +62,4 @@ public class submission {
     public void setScore(float newScore) {
         this.score = newScore;
     }
-    public void input(){
-        
-    }
 }
