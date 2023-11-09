@@ -2,38 +2,45 @@ import java.util.Scanner;
 
 public class Student_Exam {
     private String examID;
-    private String studentID;
+    private Student student;
+    private String identifier;
 
     public Student_Exam() {
     }
 
-    public Student_Exam(String examID, String studentID) {
+    public Student_Exam(String examID, Student student, String identifier) {
         this.examID = examID;
-        this.studentID = studentID;
+        this.student = student;
+        this.identifier = identifier;
     }
 
     public Student_Exam(Student_Exam other) {
         examID = other.examID;
-        studentID = other.studentID;
+        student = other.student;
+        identifier = other.identifier;
     }
 
     public String getExamID() {
         return examID;
     }
 
-    public String getStudentID() {
-        return studentID;
+    public String getIdentifier() {
+        return identifier;
+    }
+    public Student getStudent() {
+        return student;
     }
 
     public void setExamID(String examID) {
         this.examID = examID;
     }
-
-    // public void setStudentID(Student other) {
-    //     this.studentID = other.id;
-    // }
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
 
     public void input() {
+        System.out.print("Input studen infor: ");
+        student.input();
         System.out.print("Input Exam ID: ");
         Scanner scanner = new Scanner(System.in);
         examID = scanner.nextLine();

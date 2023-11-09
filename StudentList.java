@@ -432,7 +432,7 @@ public class StudentList {
         // Duyệt qua studentList hiện tại
         int m = 0;
         for (int i = 0; i < n; i++) {
-            // Thêm mã lớp vào mảng classArray nếu chưa có
+            // Thêm giới tính vào mảng classArray nếu chưa có
             boolean found = false;
             for (int j = 0; j < m; j++) {
                 if (StudentArray[i].gender.equals(genderArray[j])) {
