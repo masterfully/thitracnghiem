@@ -1,20 +1,16 @@
 import java.util.Scanner;
 
 public abstract class human {
-    private String ID;
-    String faculty;
     private String firstName;
     private String lastName;
-    String gender;
+    private String gender;
     private String dateOfBirth;
 
     public human() {
     }
 
-    public human(String ID, String faculty, String firstName, String lastName, String gender,
+    public human(String firstName, String lastName, String gender,
             String dateOfBirth) {
-        this.ID = ID;
-        this.faculty = faculty;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -22,8 +18,6 @@ public abstract class human {
     }
 
     public human(human other) {
-        this.ID = other.ID;
-        this.faculty = other.faculty;
         this.firstName = other.firstName;
         this.lastName = other.lastName;
         this.gender = other.gender;
@@ -32,13 +26,9 @@ public abstract class human {
 
     public void input() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Input ID: ");
-        this.ID = scanner.nextLine();
-        System.out.print("Input Faculty: ");
-        this.faculty = scanner.nextLine();
-        System.out.print("\nInput Student's firstname: ");
+        System.out.print("\nInput firstname: ");
         this.firstName = scanner.nextLine();
-        System.out.print("\nInput Student's lastname: ");
+        System.out.print("\nInput lastname: ");
         this.lastName = scanner.nextLine();
         System.out.print("\nInput gender: ");
         this.gender = scanner.nextLine();
@@ -47,26 +37,14 @@ public abstract class human {
     }
 
     public void output() {
-        System.out.print("ID: ");
-        System.out.println(this.ID);
-        System.out.print("Student's faculty: ");
-        System.out.println(this.faculty);
-        System.out.print("Student's firstname: ");
+        System.out.print("Firstname: ");
         System.out.println(this.firstName);
-        System.out.print("Student's lastname: ");
+        System.out.print("Lastname: ");
         System.out.println(this.lastName);
         System.out.print("Gender: ");
         System.out.println(this.gender);
-        System.out.print("date of birth: ");
+        System.out.print("Date of birth: ");
         System.out.println(this.dateOfBirth);
-    }
-
-    public String getId() {
-        return ID;
-    }
-
-    public String getFaculty() {
-        return faculty;
     }
 
     public String getFirstName() {
@@ -83,14 +61,6 @@ public abstract class human {
 
     public String getdateOfBirth() {
         return dateOfBirth;
-    }
-
-    public void setId(String Studentid) {
-        ID = Studentid;
-    }
-
-    public void setFaculty(String StudentFaculty) {
-        faculty = StudentFaculty;
     }
 
     public void setFirstName(String StudentFirstName) {

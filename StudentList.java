@@ -345,21 +345,21 @@ public class StudentList {
             // Thêm mã lớp vào mảng classArray nếu chưa có
             boolean found = false;
             for (int j = 0; j < m; j++) {
-                if (StudentArray[i].currentClass.equals(classArray[j])) {
+                if (StudentArray[i].getCurrentClass().equals(classArray[j])) {
                     found = true;
                     break;
                 }
             }
 
             if (!found) {
-                classArray[m] = StudentArray[i].currentClass;
+                classArray[m] = StudentArray[i].getCurrentClass();
                 m++;
             }
         }
         StudentList result = new StudentList();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (StudentArray[j].currentClass.equals(classArray[i])) {
+                if (StudentArray[j].getCurrentClass().equals(classArray[i])) {
                     result.addStudent(StudentArray[i]);
                 }
             }
@@ -369,7 +369,7 @@ public class StudentList {
         for (int i = 0; i < m; i++) {
             int count = 0;
             for (int j = 0; j < n; j++) {
-                if (StudentArray[j].currentClass.equals(classArray[i])) {
+                if (StudentArray[j].getCurrentClass().equals(classArray[i])) {
                     count++;
                 }
             }
@@ -390,21 +390,21 @@ public class StudentList {
             // Thêm mã khoa vào mảng classArray nếu chưa có
             boolean found = false;
             for (int j = 0; j < m; j++) {
-                if (StudentArray[i].faculty.equals(facultyArray[j])) {
+                if (StudentArray[i].getFaculty().equals(facultyArray[j])) {
                     found = true;
                     break;
                 }
             }
 
             if (!found) {
-                facultyArray[m] = StudentArray[i].faculty;
+                facultyArray[m] = StudentArray[i].getFaculty();
                 m++;
             }
         }
         StudentList result = new StudentList();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (StudentArray[j].faculty.equals(facultyArray[i])) {
+                if (StudentArray[j].getFaculty().equals(facultyArray[i])) {
                     result.addStudent(StudentArray[i]);
                 }
             }
@@ -414,7 +414,7 @@ public class StudentList {
         for (int i = 0; i < m; i++) {
             int count = 0;
             for (int j = 0; j < n; j++) {
-                if (StudentArray[j].faculty.equals(facultyArray[i])) {
+                if (StudentArray[j].getFaculty().equals(facultyArray[i])) {
                     count++;
                 }
             }
@@ -435,21 +435,21 @@ public class StudentList {
             // Thêm giới tính vào mảng classArray nếu chưa có
             boolean found = false;
             for (int j = 0; j < m; j++) {
-                if (StudentArray[i].gender.equals(genderArray[j])) {
+                if (StudentArray[i].getGender().equals(genderArray[j])) {
                     found = true;
                     break;
                 }
             }
 
             if (!found) {
-                genderArray[m] = StudentArray[i].gender;
+                genderArray[m] = StudentArray[i].getGender();
                 m++;
             }
         }
         StudentList result = new StudentList();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (StudentArray[j].gender.equals(genderArray[i])) {
+                if (StudentArray[j].getGender().equals(genderArray[i])) {
                     result.addStudent(StudentArray[i]);
                 }
             }
@@ -459,7 +459,7 @@ public class StudentList {
         for (int i = 0; i < m; i++) {
             int count = 0;
             for (int j = 0; j < n; j++) {
-                if (StudentArray[j].gender.equals(genderArray[i])) {
+                if (StudentArray[j].getGender().equals(genderArray[i])) {
                     count++;
                 }
             }
