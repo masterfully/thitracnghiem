@@ -1,14 +1,15 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Student {
-    String id;
-    private String faculty;
+public class Student  implements Serializable {
+    private String id;
+    String faculty;
     private String firstName;
     private String lastName;
-    private String currentClass;
-    private String gender;
+    String currentClass;
+    String gender;
     private String dateOfBirth;
-
+    
     public Student() {
     }
 

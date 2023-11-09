@@ -29,9 +29,9 @@ public class Student_Exam {
         this.examID = examID;
     }
 
-    public void setStudentID(Student other) {
-        this.studentID = other.id;
-    }
+    // public void setStudentID(Student other) {
+    //     this.studentID = other.id;
+    // }
 
     public void input() {
         System.out.print("Input Exam ID: ");

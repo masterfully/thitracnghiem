@@ -1,10 +1,9 @@
-import java.util.HashMap;
-import java.util.Map;
+
 import java.util.Scanner;
 
 public class StudentList {
-    private Student[] StudentArray;
-    private int n;
+    Student[] StudentArray;
+    int n;
 
     public StudentList() {
         this.StudentArray = new Student[10];
@@ -146,6 +145,8 @@ public class StudentList {
             System.out.println("4. Class");
             System.out.println("5. Gender");
             System.out.println("6. date of birth");
+            System.out.println("7. faculty");
+           
             int option = scanner.nextInt();
 
             switch (option) {
@@ -178,6 +179,11 @@ public class StudentList {
                     System.out.print("Input new date of birth: ");
                     String newDateOfBirth = scanner.nextLine();
                     StudentArray[position].setdateOfBirth(newDateOfBirth);
+                    break;
+                case 7:
+                    System.out.print("Input new faculty: ");
+                    String newFaculty = scanner.nextLine();
+                    StudentArray[position].setFaculty(newFaculty);
                     break;
             }
 
@@ -271,7 +277,7 @@ public class StudentList {
         return results;
     }
 
-    private StudentList searchStudentsByClass(String classid) {
+    StudentList searchStudentsByClass(String classid) {
         StudentList results = new StudentList();
         for (int i = 0; i < n; i++) {
             if (StudentArray[i].getCurrentClass().equals(classid)) {
@@ -308,20 +314,20 @@ public class StudentList {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Select statistics criteria:");
         System.out.println("1. Class");
-        System.out.println("2. Gender");
-        System.out.println("3. year of birth");
+        System.out.println("2. Faculty");
+        System.out.println("3. Gender");
         System.out.print("Select statistics option:");
         int option = Integer.parseInt(scanner.nextLine());
         StudentList result = new StudentList();
         switch (option) {
             case 1:
-                result = statisticsByClass();
+                statisticsByClass();
                 break;
             case 2:
-                result = statisticsByGender();
+                statisticsByFaculty();
                 break;
             case 3:
-                result = statisticsByYearOfBirth();
+                statisticsByGender();
                 break;
             default:
                 System.out.println("Invalid option.");
@@ -330,76 +336,139 @@ public class StudentList {
         return result;
     }
 
-    public StudentList statisticsByClass() {
+    public void statisticsByClass() {
+        String[] classArray = new String[StudentArray.length];
 
-        StudentList result = new StudentList();
-        String[] typesOfClass = new String[StudentArray.length];
-        typesOfClass[0] = StudentArray[0].getCurrentClass();
-
-        for (int i = 1; i < n; i++) {
-            boolean isClassExist = false;
-            for (int j = 0; j < i; j++) {
-                if (StudentArray[i].getCurrentClass().equals(typesOfClass[j])) {
-                    isClassExist = true;
+        // Duyệt qua studentList hiện tại
+        int m = 0;
+        for (int i = 0; i < n; i++) {
+            // Thêm mã lớp vào mảng classArray nếu chưa có
+            boolean found = false;
+            for (int j = 0; j < m; j++) {
+                if (StudentArray[i].currentClass.equals(classArray[j])) {
+                    found = true;
                     break;
                 }
             }
 
-            if (!isClassExist) {
-                typesOfClass[i] = StudentArray[i].getCurrentClass();
+            if (!found) {
+                classArray[m] = StudentArray[i].currentClass;
+                m++;
             }
         }
-
-        for (String typeOfClass : typesOfClass) {
-            Student student = new Student(null, null, null, typeOfClass, null, null, null);
-            result.addStudent(student);
+        StudentList result = new StudentList();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (StudentArray[j].currentClass.equals(classArray[i])) {
+                    result.addStudent(StudentArray[i]);
+                }
+            }
         }
-
-        return result;
+        // Trả về studentList kết quả.
+        System.out.println("----------------------\nStatistic by class:");
+        for (int i = 0; i < m; i++) {
+            int count = 0;
+            for (int j = 0; j < n; j++) {
+                if (StudentArray[j].currentClass.equals(classArray[i])) {
+                    count++;
+                }
+            }
+            System.out.println("Class " + classArray[i] + " has " + count + " students: ");
+            for (int k = 0; k < count; k++) {
+                result.StudentArray[k].output();
+                System.out.println("--------------------------------");
+            }
+        }
     }
 
-    public StudentList statisticsByGender() {
-        StudentList result = new StudentList();
+    public void statisticsByFaculty() {
+        String[] facultyArray = new String[StudentArray.length];
 
-        Map<String, Integer> genderCounts = new HashMap<>();
-        for (Student student : StudentArray) {
-            String gender = student.getGender();
-
-            if (!genderCounts.containsKey(gender)) {
-                genderCounts.put(gender, 0);
+        // Duyệt qua studentList hiện tại
+        int m = 0;
+        for (int i = 0; i < n; i++) {
+            // Thêm mã khoa vào mảng classArray nếu chưa có
+            boolean found = false;
+            for (int j = 0; j < m; j++) {
+                if (StudentArray[i].faculty.equals(facultyArray[j])) {
+                    found = true;
+                    break;
+                }
             }
 
-            genderCounts.put(gender, genderCounts.get(gender) + 1);
+            if (!found) {
+                facultyArray[m] = StudentArray[i].faculty;
+                m++;
+            }
         }
-
-        for (String gender : genderCounts.keySet()) {
-            Student student = new Student(null, null, null, null, null, gender, null);
-            result.addStudent(student);
+        StudentList result = new StudentList();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (StudentArray[j].faculty.equals(facultyArray[i])) {
+                    result.addStudent(StudentArray[i]);
+                }
+            }
         }
-
-        return result;
+        // Trả về studentList kết quả.
+        System.out.println("----------------------\nStatistic by class:");
+        for (int i = 0; i < m; i++) {
+            int count = 0;
+            for (int j = 0; j < n; j++) {
+                if (StudentArray[j].faculty.equals(facultyArray[i])) {
+                    count++;
+                }
+            }
+            System.out.println("faculty " + facultyArray[i] + " has " + count + " students: ");
+            for (int k = 0; k < count; k++) {
+                result.StudentArray[k].output();
+                System.out.println("--------------------------------");
+            }
+        }
     }
 
-    public StudentList statisticsByYearOfBirth() {
-        StudentList result = new StudentList();
+    public void statisticsByGender() {
+        String[] genderArray = new String[StudentArray.length];
 
-        Map<Integer, Integer> yearOfBirthCounts = new HashMap<>();
-        for (Student student : StudentArray) {
-            int yearOfBirth = Integer.parseInt(student.getdateOfBirth());
-
-            if (!yearOfBirthCounts.containsKey(yearOfBirth)) {
-                yearOfBirthCounts.put(yearOfBirth, 0);
+        // Duyệt qua studentList hiện tại
+        int m = 0;
+        for (int i = 0; i < n; i++) {
+            // Thêm mã lớp vào mảng classArray nếu chưa có
+            boolean found = false;
+            for (int j = 0; j < m; j++) {
+                if (StudentArray[i].gender.equals(genderArray[j])) {
+                    found = true;
+                    break;
+                }
             }
 
-            yearOfBirthCounts.put(yearOfBirth, yearOfBirthCounts.get(yearOfBirth) + 1);
+            if (!found) {
+                genderArray[m] = StudentArray[i].gender;
+                m++;
+            }
         }
-
-        for (Integer yearOfBirth : yearOfBirthCounts.keySet()) {
-            Student student = new Student(null, null, null, null, null, null, String.valueOf(yearOfBirth));
-            result.addStudent(student);
+        StudentList result = new StudentList();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (StudentArray[j].gender.equals(genderArray[i])) {
+                    result.addStudent(StudentArray[i]);
+                }
+            }
         }
-
-        return result;
+        // Trả về studentList kết quả.
+        System.out.println("----------------------\nStatistic by class:");
+        for (int i = 0; i < m; i++) {
+            int count = 0;
+            for (int j = 0; j < n; j++) {
+                if (StudentArray[j].gender.equals(genderArray[i])) {
+                    count++;
+                }
+            }
+            System.out.println("Gender " + genderArray[i] + " has " + count + " students: ");
+            for (int k = 0; k < count; k++) {
+                result.StudentArray[k].output();
+                System.out.println("--------------------------------");
+            }
+        }
     }
 
 }
