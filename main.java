@@ -1,11 +1,7 @@
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class main {
@@ -18,7 +14,7 @@ public class main {
                 writer.write(studentList.StudentArray[i].getId() + "," + studentList.StudentArray[i].getFaculty() + ","
                         + studentList.StudentArray[i].getFirstName() + "," + studentList.StudentArray[i].getLastName()
                         + "," + studentList.StudentArray[i].getCurrentClass() + ","
-                        + studentList.StudentArray[i].getGender() + "," + studentList.StudentArray[i].getdateOfBirth());
+                        + studentList.StudentArray[i].getGender() + "," + studentList.StudentArray[i].getDateOfBirth());
                 writer.newLine();
             }
             writer.close();
@@ -28,7 +24,8 @@ public class main {
 
         }
     }
-    public static void readFile(StudentList studentList) throws FileNotFoundException{
+
+    public static void readFile(StudentList studentList) throws FileNotFoundException {
         File file = new File("D:\\Second year\\OOP\\thitracnghiem\\data.txt");
         Scanner scanner = new Scanner(file);
         try {
@@ -41,7 +38,8 @@ public class main {
             e.printStackTrace();
         }
     }
-    public static void main(String[] args) throws FileNotFoundException{
+
+    public static void main(String[] args) throws FileNotFoundException {
         StudentList studentList = new StudentList();
         readFile(studentList);
         studentList.printList();

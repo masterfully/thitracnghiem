@@ -17,7 +17,7 @@ public class Student extends human{
     }
 
     public Student(Student other) {
-        super((Student)other);
+        super(other);
         this.ID = other.ID;
         this.faculty = other.faculty;
         this.currentClass = other.currentClass;
@@ -61,8 +61,8 @@ public class Student extends human{
     }
 
     
-    public void setId(String Studentid) {
-        ID = Studentid;
+    public void setId(String Student) {
+        ID = Student;
     }
 
     public void setFaculty(String StudentFaculty) {

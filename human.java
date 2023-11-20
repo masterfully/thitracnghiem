@@ -59,7 +59,7 @@ public abstract class human {
         return gender;
     }
 
-    public String getdateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
@@ -75,7 +75,7 @@ public abstract class human {
         gender = StudentGender;
     }
 
-    public void setdateOfBirth(String StudentDateOfBirth) {
+    public void setDateOfBirth(String StudentDateOfBirth) {
         dateOfBirth = StudentDateOfBirth;
     }
 }

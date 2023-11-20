@@ -51,7 +51,7 @@ public class StudentList {
             System.out.println("\tLast name: " + st.getLastName());
             System.out.println("\tClass: " + st.getCurrentClass());
             System.out.println("\tGender: " + st.getGender());
-            System.out.println("\tdate of birth: " + st.getdateOfBirth());
+            System.out.println("\tdate of birth: " + st.getDateOfBirth());
         }
     }
 
@@ -178,7 +178,7 @@ public class StudentList {
                 case 6:
                     System.out.print("Input new date of birth: ");
                     String newDateOfBirth = scanner.nextLine();
-                    StudentArray[position].setdateOfBirth(newDateOfBirth);
+                    StudentArray[position].setDateOfBirth(newDateOfBirth);
                     break;
                 case 7:
                     System.out.print("Input new faculty: ");
@@ -302,7 +302,7 @@ public class StudentList {
     private StudentList searchStudentsBydateOfBirth(String dateOfBirth) {
         StudentList results = new StudentList();
         for (int i = 0; i < n; i++) {
-            if (StudentArray[i].getdateOfBirth().equals(dateOfBirth)) {
+            if (StudentArray[i].getDateOfBirth().equals(dateOfBirth)) {
                 results.addStudent(StudentArray[i]);
             }
         }
@@ -387,7 +387,7 @@ public class StudentList {
         // Duyệt qua studentList hiện tại
         int m = 0;
         for (int i = 0; i < n; i++) {
-            // Thêm mã khoa vào mảng classArray nếu chưa có
+            // \\Thêm mã khoa vào mảng classArray nếu chưa có
             boolean found = false;
             for (int j = 0; j < m; j++) {
                 if (StudentArray[i].getFaculty().equals(facultyArray[j])) {
