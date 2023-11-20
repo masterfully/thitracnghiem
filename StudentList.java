@@ -33,8 +33,8 @@ public class StudentList {
     }
 
     public void addStudent(String id, String faculty, String firstName, String lastName, String currentClass,
-            String gender,
-            String dateOfBirth) {
+                           String gender,
+                           String dateOfBirth) {
         Student st = new Student(id, faculty, firstName, lastName, currentClass, gender, dateOfBirth);
         StudentArray[n] = st;
         n++;
@@ -61,7 +61,7 @@ public class StudentList {
         }
     }
 
-    public void deleteByid() {
+    public void deleteById() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Input Student id which you want to delete: ");
         String id = scanner.nextLine();
@@ -84,7 +84,7 @@ public class StudentList {
         }
     }
 
-    public void deleteByid(String id) {
+    public void deleteById(String id) {
         int position = -1;
         for (int i = 0; i < n; i++) {
             if (StudentArray[i].getId().indexOf(id) == 0) {
@@ -146,14 +146,14 @@ public class StudentList {
             System.out.println("5. Gender");
             System.out.println("6. date of birth");
             System.out.println("7. faculty");
-           
+
             int option = scanner.nextInt();
 
             switch (option) {
                 case 1:
                     System.out.print("Input new id: ");
-                    String newid = scanner.nextLine();
-                    StudentArray[position].setId(newid);
+                    String newId = scanner.nextLine();
+                    StudentArray[position].setId(newId);
                     break;
                 case 2:
                     System.out.print("Input new first name: ");
@@ -210,7 +210,7 @@ public class StudentList {
             case 1:
                 System.out.print("Input Student id: ");
                 String id = scanner.nextLine();
-                results = searchStudentsByid(id);
+                results = searchStudentsById(id);
                 break;
             case 2:
                 System.out.print("Input first name: ");
@@ -224,8 +224,8 @@ public class StudentList {
                 break;
             case 4:
                 System.out.print("Input class: ");
-                String classid = scanner.nextLine();
-                results = searchStudentsByClass(classid);
+                String classId = scanner.nextLine();
+                results = searchStudentsByClass(classId);
                 break;
             case 5:
                 System.out.print("Input gender: ");
@@ -235,7 +235,7 @@ public class StudentList {
             case 6:
                 System.out.print("Input date of birth: ");
                 String dateOfBirth = scanner.nextLine();
-                results = searchStudentsBydateOfBirth(dateOfBirth);
+                results = searchStudentsByDateOfBirth(dateOfBirth);
                 break;
             default:
                 System.out.println("Invalid option.");
@@ -244,7 +244,7 @@ public class StudentList {
         results.printList();
     }
 
-    private StudentList searchStudentsByid(String id) {
+    private StudentList searchStudentsById(String id) {
         StudentList results = new StudentList();
         for (int i = 0; i < n; i++) {
             if (StudentArray[i].getId().equals(id)) {
@@ -277,10 +277,10 @@ public class StudentList {
         return results;
     }
 
-    StudentList searchStudentsByClass(String classid) {
+    StudentList searchStudentsByClass(String classId) {
         StudentList results = new StudentList();
         for (int i = 0; i < n; i++) {
-            if (StudentArray[i].getCurrentClass().equals(classid)) {
+            if (StudentArray[i].getCurrentClass().equals(classId)) {
                 results.addStudent(StudentArray[i]);
             }
         }
@@ -299,7 +299,7 @@ public class StudentList {
         return results;
     }
 
-    private StudentList searchStudentsBydateOfBirth(String dateOfBirth) {
+    private StudentList searchStudentsByDateOfBirth(String dateOfBirth) {
         StudentList results = new StudentList();
         for (int i = 0; i < n; i++) {
             if (StudentArray[i].getDateOfBirth().equals(dateOfBirth)) {
@@ -339,7 +339,7 @@ public class StudentList {
     public void statisticsByClass() {
         String[] classArray = new String[StudentArray.length];
 
-        // Duyệt qua studentList hiện tại
+        //Duyệt qua studentList hiện tại
         int m = 0;
         for (int i = 0; i < n; i++) {
             // Thêm mã lớp vào mảng classArray nếu chưa có
