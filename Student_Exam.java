@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Student_Exam {
     private String examID;
     private Student student;
-    private String identifier;
+    private String identifier; //số báo danh
 
     public Student_Exam() {
     }

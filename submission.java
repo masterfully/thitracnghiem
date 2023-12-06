@@ -1,5 +1,5 @@
 public class submission {
-    private Student_Exam student;
+    private Student_Exam Student_Exam;
     private String maDe;
     private int correct, wrong;
     private float score;
@@ -8,7 +8,7 @@ public class submission {
     }
 
     public submission(Student_Exam student, String maDe, int correct, int wrong, float score) {
-        this.student = student;
+        this.Student_Exam = student;
         this.maDe = maDe;
         this.correct = correct;
         this.wrong = wrong;
@@ -16,7 +16,7 @@ public class submission {
     }
 
     public submission(submission other) {
-        this.student = other.student;
+        this.Student_Exam = other.Student_Exam;
         this.maDe = other.maDe;
         this.correct = other.correct;
         this.wrong = other.wrong;

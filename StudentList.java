@@ -6,7 +6,7 @@ public class StudentList {
     int n;
 
     public StudentList() {
-        this.StudentArray = new Student[10];
+        this.StudentArray = new Student[100];
         this.n = 0;
     }
 
@@ -33,8 +33,8 @@ public class StudentList {
     }
 
     public void addStudent(String id, String faculty, String firstName, String lastName, String currentClass,
-                           String gender,
-                           String dateOfBirth) {
+            String gender,
+            String dateOfBirth) {
         Student st = new Student(id, faculty, firstName, lastName, currentClass, gender, dateOfBirth);
         StudentArray[n] = st;
         n++;
@@ -244,7 +244,7 @@ public class StudentList {
         results.printList();
     }
 
-    private StudentList searchStudentsById(String id) {
+    public StudentList searchStudentsById(String id) {
         StudentList results = new StudentList();
         for (int i = 0; i < n; i++) {
             if (StudentArray[i].getId().equals(id)) {
@@ -255,7 +255,7 @@ public class StudentList {
         return results;
     }
 
-    private StudentList searchStudentsByFirstName(String firstName) {
+    public StudentList searchStudentsByFirstName(String firstName) {
         StudentList results = new StudentList();
         for (int i = 0; i < n; i++) {
             if (StudentArray[i].getFirstName().contains(firstName)) {
@@ -266,7 +266,7 @@ public class StudentList {
         return results;
     }
 
-    private StudentList searchStudentsByLastName(String lastName) {
+    public StudentList searchStudentsByLastName(String lastName) {
         StudentList results = new StudentList();
         for (int i = 0; i < n; i++) {
             if (StudentArray[i].getLastName().contains(lastName)) {
@@ -277,7 +277,7 @@ public class StudentList {
         return results;
     }
 
-    StudentList searchStudentsByClass(String classId) {
+    public StudentList searchStudentsByClass(String classId) {
         StudentList results = new StudentList();
         for (int i = 0; i < n; i++) {
             if (StudentArray[i].getCurrentClass().equals(classId)) {
@@ -288,7 +288,7 @@ public class StudentList {
         return results;
     }
 
-    private StudentList searchStudentsByGender(String gender) {
+    public StudentList searchStudentsByGender(String gender) {
         StudentList results = new StudentList();
         for (int i = 0; i < n; i++) {
             if (StudentArray[i].getGender().equals(gender)) {
@@ -299,10 +299,21 @@ public class StudentList {
         return results;
     }
 
-    private StudentList searchStudentsByDateOfBirth(String dateOfBirth) {
+    public StudentList searchStudentsByDateOfBirth(String dateOfBirth) {
         StudentList results = new StudentList();
         for (int i = 0; i < n; i++) {
             if (StudentArray[i].getDateOfBirth().equals(dateOfBirth)) {
+                results.addStudent(StudentArray[i]);
+            }
+        }
+
+        return results;
+    }
+
+    public StudentList searchStudentsByFaculty(String faculty) {
+        StudentList results = new StudentList();
+        for (int i = 0; i < n; i++) {
+            if (StudentArray[i].getFaculty().equals(faculty)) {
                 results.addStudent(StudentArray[i]);
             }
         }
@@ -339,7 +350,7 @@ public class StudentList {
     public void statisticsByClass() {
         String[] classArray = new String[StudentArray.length];
 
-        //Duyệt qua studentList hiện tại
+        // Duyệt qua studentList hiện tại
         int m = 0;
         for (int i = 0; i < n; i++) {
             // Thêm mã lớp vào mảng classArray nếu chưa có
@@ -356,27 +367,23 @@ public class StudentList {
                 m++;
             }
         }
-        StudentList result = new StudentList();
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (StudentArray[j].getCurrentClass().equals(classArray[i])) {
-                    result.addStudent(StudentArray[i]);
-                }
-            }
-        }
+
         // Trả về studentList kết quả.
         System.out.println("----------------------\nStatistic by class:");
         for (int i = 0; i < m; i++) {
+            StudentList result = new StudentList(); // Move the result initialization inside the loop
             int count = 0;
             for (int j = 0; j < n; j++) {
                 if (StudentArray[j].getCurrentClass().equals(classArray[i])) {
+                    result.addStudent(StudentArray[j]); // Fix the index to 'j' instead of 'i'
                     count++;
                 }
             }
+
             System.out.println("Class " + classArray[i] + " has " + count + " students: ");
             for (int k = 0; k < count; k++) {
-                result.StudentArray[k].output();
-                System.out.println("--------------------------------");
+                result.StudentArray[k].output(); // Access the result array
+                System.out.println("-----------------------------------------------------");
             }
         }
     }
@@ -387,7 +394,7 @@ public class StudentList {
         // Duyệt qua studentList hiện tại
         int m = 0;
         for (int i = 0; i < n; i++) {
-            // \\Thêm mã khoa vào mảng classArray nếu chưa có
+            // Thêm mã lớp vào mảng classArray nếu chưa có
             boolean found = false;
             for (int j = 0; j < m; j++) {
                 if (StudentArray[i].getFaculty().equals(facultyArray[j])) {
@@ -401,27 +408,23 @@ public class StudentList {
                 m++;
             }
         }
-        StudentList result = new StudentList();
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (StudentArray[j].getFaculty().equals(facultyArray[i])) {
-                    result.addStudent(StudentArray[i]);
-                }
-            }
-        }
+
         // Trả về studentList kết quả.
         System.out.println("----------------------\nStatistic by class:");
         for (int i = 0; i < m; i++) {
+            StudentList result = new StudentList(); // Move the result initialization inside the loop
             int count = 0;
             for (int j = 0; j < n; j++) {
                 if (StudentArray[j].getFaculty().equals(facultyArray[i])) {
+                    result.addStudent(StudentArray[j]); // Fix the index to 'j' instead of 'i'
                     count++;
                 }
             }
-            System.out.println("faculty " + facultyArray[i] + " has " + count + " students: ");
+
+            System.out.println("Faculty " + facultyArray[i] + " has " + count + " students: ");
             for (int k = 0; k < count; k++) {
-                result.StudentArray[k].output();
-                System.out.println("--------------------------------");
+                result.StudentArray[k].output(); // Access the result array
+                System.out.println("-----------------------------------------------------");
             }
         }
     }
