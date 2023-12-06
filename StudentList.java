@@ -435,7 +435,7 @@ public class StudentList {
         // Duyệt qua studentList hiện tại
         int m = 0;
         for (int i = 0; i < n; i++) {
-            // Thêm giới tính vào mảng classArray nếu chưa có
+            // Thêm mã lớp vào mảng classArray nếu chưa có
             boolean found = false;
             for (int j = 0; j < m; j++) {
                 if (StudentArray[i].getGender().equals(genderArray[j])) {
@@ -449,27 +449,23 @@ public class StudentList {
                 m++;
             }
         }
-        StudentList result = new StudentList();
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (StudentArray[j].getGender().equals(genderArray[i])) {
-                    result.addStudent(StudentArray[i]);
-                }
-            }
-        }
+
         // Trả về studentList kết quả.
         System.out.println("----------------------\nStatistic by class:");
         for (int i = 0; i < m; i++) {
+            StudentList result = new StudentList(); // Move the result initialization inside the loop
             int count = 0;
             for (int j = 0; j < n; j++) {
                 if (StudentArray[j].getGender().equals(genderArray[i])) {
+                    result.addStudent(StudentArray[j]); // Fix the index to 'j' instead of 'i'
                     count++;
                 }
             }
+
             System.out.println("Gender " + genderArray[i] + " has " + count + " students: ");
             for (int k = 0; k < count; k++) {
-                result.StudentArray[k].output();
-                System.out.println("--------------------------------");
+                result.StudentArray[k].output(); // Access the result array
+                System.out.println("-----------------------------------------------------");
             }
         }
     }
