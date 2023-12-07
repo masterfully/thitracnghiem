@@ -42,8 +42,6 @@ public class main {
     public static void main(String[] args) throws FileNotFoundException {
         StudentList studentList = new StudentList();
         readFile(studentList);
-        studentList.statistics();
-        // StudentList studentListSearch = studentList.searchStudentsByFaculty("IT");
-        // studentListSearch.printList();
+        studentList.printList();
     }
 }
