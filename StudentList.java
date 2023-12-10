@@ -41,18 +41,25 @@ public class StudentList {
     }
 
     public void printList() {
-        System.out.println("Student list: ");
+        System.out.println(
+                "---------------------------------------------------------------------------------------------------");
+        System.out.printf("| %-4s | %-10s | %-15s | %-15s | %-10s | %-8s | %-15s |\n",
+                "ID", "Faculty", "First Name", "Last Name", "Class", "Gender", "Date of Birth");
+        System.out.println(
+                "---------------------------------------------------------------------------------------------------");
+
         for (int i = 0; i < this.n; i++) {
-            System.out.println("Student " + (i + 1) + ":");
             Student st = this.StudentArray[i];
-            System.out.println("\tid: " + st.getId());
-            System.out.println("\tFaculty: " + st.getFaculty());
-            System.out.println("\tFirst name: " + st.getFirstName());
-            System.out.println("\tLast name: " + st.getLastName());
-            System.out.println("\tClass: " + st.getCurrentClass());
-            System.out.println("\tGender: " + st.getGender());
-            System.out.println("\tdate of birth: " + st.getDateOfBirth());
+            System.out.printf("| %-4s | %-10s | %-15s | %-15s | %-10s | %-8s | %-15s |\n",
+                    st.getId(), st.getFaculty(), st.getFirstName(), st.getLastName(),
+                    st.getCurrentClass(), st.getGender(), st.getDateOfBirth());
         }
+
+        System.out.println(
+                "---------------------------------------------------------------------------------------------------");
+        System.out.println("|\t\t\t\t\tTotal students: " + this.n + "\t\t\t\t\t  |");
+        System.out.println(
+                "---------------------------------------------------------------------------------------------------");
     }
 
     public void insertList(StudentList otherList) {
@@ -202,6 +209,7 @@ public class StudentList {
         System.out.println("4. Class");
         System.out.println("5. Gender");
         System.out.println("6. date of birth");
+        System.out.println("7. faculty");
         System.out.print("Select search option: ");
         Scanner scanner = new Scanner(System.in);
         int option = Integer.parseInt(scanner.nextLine());
@@ -236,6 +244,11 @@ public class StudentList {
                 System.out.print("Input date of birth: ");
                 String dateOfBirth = scanner.nextLine();
                 results = searchStudentsByDateOfBirth(dateOfBirth);
+                break;
+            case 7:
+                System.out.print("Input faculty: ");
+                String faculty = scanner.nextLine();
+                results = searchStudentsByFaculty(faculty);
                 break;
             default:
                 System.out.println("Invalid option.");
@@ -327,12 +340,27 @@ public class StudentList {
         System.out.println("1. Class");
         System.out.println("2. Faculty");
         System.out.println("3. Gender");
-        System.out.print("Select statistics option:");
+        System.out.print("Select statistics option: ");
         int option = Integer.parseInt(scanner.nextLine());
         StudentList result = new StudentList();
         switch (option) {
             case 1:
-                statisticsByClass();
+                System.out.println("Do you want to print individual students?");
+                System.out.println("1. Yes");
+                System.out.println("2. No");
+                System.out.print("Select option: ");
+                int option1 = Integer.parseInt(scanner.nextLine());
+                switch (option1) {
+                    case 1:
+                        statisticsByClassIndividually();
+                        break;
+                    case 2:
+                        statisticsByClass();
+                        break;
+                    default:
+                        System.out.println("Invalid option.");
+                        break;
+                }
                 break;
             case 2:
                 statisticsByFaculty();
@@ -349,11 +377,8 @@ public class StudentList {
 
     public void statisticsByClass() {
         String[] classArray = new String[StudentArray.length];
-
-        // Duyệt qua studentList hiện tại
         int m = 0;
         for (int i = 0; i < n; i++) {
-            // Thêm mã lớp vào mảng classArray nếu chưa có
             boolean found = false;
             for (int j = 0; j < m; j++) {
                 if (StudentArray[i].getCurrentClass().equals(classArray[j])) {
@@ -367,24 +392,70 @@ public class StudentList {
                 m++;
             }
         }
-
-        // Trả về studentList kết quả.
         System.out.println("----------------------\nStatistic by class:");
+        System.out.printf("| %-10s | %-8s |\n", "Class", "Students");
+        System.out.println("----------------------");
         for (int i = 0; i < m; i++) {
-            StudentList result = new StudentList(); // Move the result initialization inside the loop
+            StudentList result = new StudentList();
             int count = 0;
             for (int j = 0; j < n; j++) {
                 if (StudentArray[j].getCurrentClass().equals(classArray[i])) {
-                    result.addStudent(StudentArray[j]); // Fix the index to 'j' instead of 'i'
+                    result.addStudent(StudentArray[j]);
                     count++;
                 }
             }
+            System.out.printf("| %-10s | %-8s |\n", classArray[i], count);
+        }
+    }
 
-            System.out.println("Class " + classArray[i] + " has " + count + " students: ");
-            for (int k = 0; k < count; k++) {
-                result.StudentArray[k].output(); // Access the result array
-                System.out.println("-----------------------------------------------------");
+    public void statisticsByClassIndividually() {
+        String[] classArray = new String[StudentArray.length];
+        int m = 0;
+        for (int i = 0; i < n; i++) {
+            boolean found = false;
+            for (int j = 0; j < m; j++) {
+                if (StudentArray[i].getCurrentClass().equals(classArray[j])) {
+                    found = true;
+                    break;
+                }
             }
+            if (!found) {
+                classArray[m] = StudentArray[i].getCurrentClass();
+                m++;
+            }
+        }
+        System.out.println("----------------------\nStatistic by class:");
+        System.out.printf("| %-10s | %-8s |\n", "Class", "Students");
+        System.out.println("-------------------------------------------------------------------------");
+        for (int i = 0; i < m; i++) {
+            StudentList result = new StudentList();
+            int count = 0;
+            for (int j = 0; j < n; j++) {
+                if (StudentArray[j].getCurrentClass().equals(classArray[i])) {
+                    result.addStudent(StudentArray[j]);
+                    count++;
+                }
+            }
+            System.out.printf("| %-10s | %-56s |\n", classArray[i], count);
+            if (count > 0) {
+                System.out.println("-------------------------------------------------------------------------");
+                System.out.printf("| %-4s | %-15s | %-15s | %-8s | %-15s |\n",
+                        "ID", "First Name", "Last Name", "Gender", "Date of Birth");
+                System.out.println("-------------------------------------------------------------------------");
+            }
+            for (int k = 0; k < count; k++) {
+                Student student = result.StudentArray[k];
+                System.out.printf("| %-4s | %-15s | %-15s | %-8s | %-15s |\n",
+                        student.getId(), student.getFirstName(), student.getLastName(),
+                        student.getGender(), student.getDateOfBirth());
+                System.out.println("-------------------------------------------------------------------------");
+                System.out.printf("| %-69s |\n",
+                        "Total: " + count);
+                System.out.println("-------------------------------------------------------------------------");
+
+            }
+            System.out.println("\n");
+            System.out.println("-------------------------------------------------------------------------");
         }
     }
 
