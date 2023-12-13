@@ -41,7 +41,7 @@ public class DanhSachGiaoVien implements File, DuyetDS{
 	}
 	public int timKiemid(String Maso){
         for (int i = 0; i < n; i++){
-            if (gv[i].getId() == Maso)
+            if (gv[i].getId().equals(Maso))
                 return i;
         }
         return -1;
@@ -80,6 +80,28 @@ public class DanhSachGiaoVien implements File, DuyetDS{
         gv[n] = null;
         gv = Arrays.copyOf(gv, n);
         return true;
+	}
+//	 public int timKiem(String Ten){
+//	        for (int i = 0; i < n; i++){
+//	            if ((gv[i].getLastName()).equalsIgnoreCase(Ten))
+//	                return i;
+//	        }
+//	        return -1;
+//	    }
+	
+	public int xoaPT(String x) {
+		for (int i = 1; i <= n; i++){
+            if ((gv[i].getLastName()).equalsIgnoreCase(x))
+            {
+            	n--;
+            	for (int y = i; i < n; i++){
+                    gv[i] = gv[i+1];
+                }
+            }
+        }
+		gv[n] = null;
+		gv =Arrays.copyOf(gv, n);
+		return 1;
 	}
 
 	@Override
@@ -194,9 +216,8 @@ public class DanhSachGiaoVien implements File, DuyetDS{
 	public static void main(String[] args) {
 		DanhSachGiaoVien dsgv = new DanhSachGiaoVien();
 		dsgv.docFile("danhsachgiaovien");
-		dsgv.themPT();
-		dsgv.xuatDS();
-		dsgv.ghiFile("danhsachgiaovien");
+		System.out.println(dsgv.timKiemid("1"));
+		
 	}
 
 }

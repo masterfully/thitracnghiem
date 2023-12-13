@@ -131,7 +131,66 @@ do{
     }
     
     public static void upDateGiangVien() {
-    	
+    	 Scanner scanner = new Scanner(System.in);
+         int option;
+         while (true) {
+        	 clearScreen();
+        	 System.out.println("1. Thêm giảng viên vào danh sách");
+        	 System.out.println("2. Xóa giảng viên ra khỏi danh sách bằng id");
+        	 System.out.println("3. Xóa giảng viên khỏi danh sách bằng tên");
+        	 System.out.println("4. Tìm kiếm giảng viên theo tên");
+        	 System.out.println("5. Tìm kiếm giảng viên theo id");
+        	 option = scanner.nextInt();
+        	 if(option == 1){
+        		DSGV.themPT();
+        		DSGV.xuatDS();
+        		DSGV.ghiFile("danhsachgiaovien");
+        		upDateGiangVien();
+             } else if(option == 2){
+            	 System.out.println("Nhập vào id giảng viên bạn muốn xóa");
+            	 int x = scanner.nextInt();
+            	 DSGV.xoaPT(x-1);
+            	 System.out.println("Danh sách giảng viên sao khi xóa là:");
+            	 DSGV.xuatDS();
+            	 DSGV.ghiFile();
+            	 upDateGiangVien();
+             } else if(option == 3){
+            	 System.out.println("Nhập vào tên giảng viên mà bạn muốn xóa");
+            	 String x = scanner.next();
+            	 DSGV.xoaPT(x);
+            	 System.out.println("Danh sách giảng viên sao khi xóa là:");
+            	 DSGV.xuatDS();
+            	 DSGV.ghiFile();
+            	 upDateGiangVien();
+               
+          }  else if(option == 4){
+              System.out.println("Nhập vào tên giảng viên bạn muốn tìm kiếm");
+              String x = scanner.next();
+              int temp;
+              if (DSGV.timKiem(x) != -1) {
+            	  temp = DSGV.timKiem(x);
+            	  System.out.println("Tìm được giảng viên có tên là "+ x +  " trong danh sách giảng viên");
+              } else {
+            	  System.out.println("Không tồn tại giảng viên có tên là:" + x);
+              }
+              
+              
+              upDateGiangVien();
+          } else if(option == 5) {
+        	  System.out.println("Nhập vào id giãng viên bạn muốn tìm kiếm");
+        	  String x = scanner.next();
+        	  int temp;
+        	  if (DSGV.timKiemid(x) != -1) {
+            	  temp = DSGV.timKiem(x);
+            	  System.out.println("Tìm được giảng viên có id là "+ x +  " trong danh sách giảng viên");
+              } else {
+            	  System.out.println("không tồn tại giảng viên có id là:"+ x);
+              }
+        	  upDateGiangVien();
+          }
+           System.out.println("Khong Hop Le Moi Nhap Lai");
+         }
+         
     }
     
     public static void menuAdmin() {
