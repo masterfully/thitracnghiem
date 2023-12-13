@@ -363,10 +363,40 @@ public class StudentList {
                 }
                 break;
             case 2:
-                statisticsByFaculty();
+                System.out.println("Do you want to print individual students in a faculty?");
+                System.out.println("1. Yes");
+                System.out.println("2. No");
+                System.out.print("Select option: ");
+                int option2 = Integer.parseInt(scanner.nextLine());
+                switch (option2) {
+                    case 1:
+                        statisticsByFacultyIndividually();
+                        break;
+                    case 2:
+                        statisticsByFaculty();
+                        break;
+                    default:
+                        System.out.println("Invalid option.");
+                        break;
+                }
                 break;
             case 3:
-                statisticsByGender();
+                System.out.println("Do you want to print individual students in a faculty?");
+                System.out.println("1. Yes");
+                System.out.println("2. No");
+                System.out.print("Select option: ");
+                int option3 = Integer.parseInt(scanner.nextLine());
+                switch (option3) {
+                    case 1:
+                        statisticsByGenderIndividually();
+                        break;
+                    case 2:
+                        statisticsByGender();
+                        break;
+                    default:
+                        System.out.println("Invalid option.");
+                        break;
+                }
                 break;
             default:
                 System.out.println("Invalid option.");
@@ -448,12 +478,12 @@ public class StudentList {
                 System.out.printf("| %-4s | %-15s | %-15s | %-8s | %-15s |\n",
                         student.getId(), student.getFirstName(), student.getLastName(),
                         student.getGender(), student.getDateOfBirth());
-                System.out.println("-------------------------------------------------------------------------");
-                System.out.printf("| %-69s |\n",
-                        "Total: " + count);
-                System.out.println("-------------------------------------------------------------------------");
 
             }
+            System.out.println("-------------------------------------------------------------------------");
+            System.out.printf("| %-69s |\n",
+                    "Total: " + count);
+            System.out.println("-------------------------------------------------------------------------");
             System.out.println("\n");
             System.out.println("-------------------------------------------------------------------------");
         }
@@ -461,11 +491,8 @@ public class StudentList {
 
     public void statisticsByFaculty() {
         String[] facultyArray = new String[StudentArray.length];
-
-        // Duyệt qua studentList hiện tại
         int m = 0;
         for (int i = 0; i < n; i++) {
-            // Thêm mã lớp vào mảng classArray nếu chưa có
             boolean found = false;
             for (int j = 0; j < m; j++) {
                 if (StudentArray[i].getFaculty().equals(facultyArray[j])) {
@@ -479,34 +506,78 @@ public class StudentList {
                 m++;
             }
         }
-
-        // Trả về studentList kết quả.
-        System.out.println("----------------------\nStatistic by class:");
+        System.out.println("-------------------------\nStatistic by faculty:");
+        System.out.printf("| %-10s | %-8s |\n", "faculty", "Students");
+        System.out.println("-------------------------");
         for (int i = 0; i < m; i++) {
-            StudentList result = new StudentList(); // Move the result initialization inside the loop
+            StudentList result = new StudentList();
             int count = 0;
             for (int j = 0; j < n; j++) {
                 if (StudentArray[j].getFaculty().equals(facultyArray[i])) {
-                    result.addStudent(StudentArray[j]); // Fix the index to 'j' instead of 'i'
+                    result.addStudent(StudentArray[j]);
                     count++;
                 }
             }
+            System.out.printf("| %-10s | %-8s |\n", facultyArray[i], count);
+        }
+        System.out.println("-------------------------");
+    }
 
-            System.out.println("Faculty " + facultyArray[i] + " has " + count + " students: ");
-            for (int k = 0; k < count; k++) {
-                result.StudentArray[k].output(); // Access the result array
-                System.out.println("-----------------------------------------------------");
+    public void statisticsByFacultyIndividually() {
+        String[] facultyArray = new String[StudentArray.length];
+        int m = 0;
+        for (int i = 0; i < n; i++) {
+            boolean found = false;
+            for (int j = 0; j < m; j++) {
+                if (StudentArray[i].getFaculty().equals(facultyArray[j])) {
+                    found = true;
+                    break;
+                }
             }
+            if (!found) {
+                facultyArray[m] = StudentArray[i].getFaculty();
+                m++;
+            }
+        }
+        System.out.println("----------------------\nStatistic by faculty individually:");
+        System.out.printf("| %-10s | %-8s |\n", "Faculty", "Students");
+        System.out.println("-------------------------------------------------------------------------");
+        for (int i = 0; i < m; i++) {
+            StudentList result = new StudentList();
+            int count = 0;
+            for (int j = 0; j < n; j++) {
+                if (StudentArray[j].getFaculty().equals(facultyArray[i])) {
+                    result.addStudent(StudentArray[j]);
+                    count++;
+                }
+            }
+            System.out.printf("| %-10s | %-56s |\n", facultyArray[i], count);
+            if (count > 0) {
+                System.out.println("-------------------------------------------------------------------------");
+                System.out.printf("| %-4s | %-15s | %-15s | %-8s | %-15s |\n",
+                        "ID", "First Name", "Last Name", "Gender", "Date of Birth");
+                System.out.println("-------------------------------------------------------------------------");
+            }
+            for (int k = 0; k < count; k++) {
+                Student student = result.StudentArray[k];
+                System.out.printf("| %-4s | %-15s | %-15s | %-8s | %-15s |\n",
+                        student.getId(), student.getFirstName(), student.getLastName(),
+                        student.getGender(), student.getDateOfBirth());
+
+            }
+            System.out.println("-------------------------------------------------------------------------");
+            System.out.printf("| %-69s |\n",
+                    "Total: " + count);
+            System.out.println("-------------------------------------------------------------------------");
+            System.out.println("\n");
+            System.out.println("-------------------------------------------------------------------------");
         }
     }
 
     public void statisticsByGender() {
         String[] genderArray = new String[StudentArray.length];
-
-        // Duyệt qua studentList hiện tại
         int m = 0;
         for (int i = 0; i < n; i++) {
-            // Thêm mã lớp vào mảng classArray nếu chưa có
             boolean found = false;
             for (int j = 0; j < m; j++) {
                 if (StudentArray[i].getGender().equals(genderArray[j])) {
@@ -520,24 +591,71 @@ public class StudentList {
                 m++;
             }
         }
-
-        // Trả về studentList kết quả.
-        System.out.println("----------------------\nStatistic by class:");
+        System.out.println("-------------------------\nStatistic by gender:");
+        System.out.printf("| %-10s | %-8s |\n", "gender", "Students");
+        System.out.println("-------------------------");
         for (int i = 0; i < m; i++) {
-            StudentList result = new StudentList(); // Move the result initialization inside the loop
+            StudentList result = new StudentList();
             int count = 0;
             for (int j = 0; j < n; j++) {
                 if (StudentArray[j].getGender().equals(genderArray[i])) {
-                    result.addStudent(StudentArray[j]); // Fix the index to 'j' instead of 'i'
+                    result.addStudent(StudentArray[j]);
                     count++;
                 }
             }
+            System.out.printf("| %-10s | %-8s |\n", genderArray[i], count);
+        }
+        System.out.println("-------------------------");
+    }
 
-            System.out.println("Gender " + genderArray[i] + " has " + count + " students: ");
-            for (int k = 0; k < count; k++) {
-                result.StudentArray[k].output(); // Access the result array
-                System.out.println("-----------------------------------------------------");
+    public void statisticsByGenderIndividually() {
+        String[] genderArray = new String[StudentArray.length];
+        int m = 0;
+        for (int i = 0; i < n; i++) {
+            boolean found = false;
+            for (int j = 0; j < m; j++) {
+                if (StudentArray[i].getGender().equals(genderArray[j])) {
+                    found = true;
+                    break;
+                }
             }
+            if (!found) {
+                genderArray[m] = StudentArray[i].getGender();
+                m++;
+            }
+        }
+        System.out.println("----------------------\nStatistic by gender individually:");
+        System.out.printf("| %-10s | %-8s |\n", "Gender", "Students");
+        System.out.println("-------------------------------------------------------------------------");
+        for (int i = 0; i < m; i++) {
+            StudentList result = new StudentList();
+            int count = 0;
+            for (int j = 0; j < n; j++) {
+                if (StudentArray[j].getGender().equals(genderArray[i])) {
+                    result.addStudent(StudentArray[j]);
+                    count++;
+                }
+            }
+            System.out.printf("| %-10s | %-56s |\n", genderArray[i], count);
+            if (count > 0) {
+                System.out.println("-------------------------------------------------------------------------");
+                System.out.printf("| %-4s | %-15s | %-15s | %-8s | %-15s |\n",
+                        "ID", "First Name", "Last Name", "Gender", "Date of Birth");
+                System.out.println("-------------------------------------------------------------------------");
+            }
+            for (int k = 0; k < count; k++) {
+                Student student = result.StudentArray[k];
+                System.out.printf("| %-4s | %-15s | %-15s | %-8s | %-15s |\n",
+                        student.getId(), student.getFirstName(), student.getLastName(),
+                        student.getGender(), student.getDateOfBirth());
+
+            }
+            System.out.println("-------------------------------------------------------------------------");
+            System.out.printf("| %-69s |\n",
+                    "Total: " + count);
+            System.out.println("-------------------------------------------------------------------------");
+            System.out.println("\n");
+            System.out.println("-------------------------------------------------------------------------");
         }
     }
 
