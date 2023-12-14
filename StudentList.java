@@ -77,7 +77,7 @@ public class StudentList {
             if (StudentArray[i].getId().indexOf(id) == 0) {
                 position = i;
                 break;
-            }
+            } 
         }
         if (position != -1) {
             for (int j = position; j < n + 1; j++) {
@@ -333,6 +333,8 @@ public class StudentList {
 
         return results;
     }
+// ----------------------------done search------------------------------------
+
 
     public StudentList statistics() {
         Scanner scanner = new Scanner(System.in);
@@ -658,5 +660,5 @@ public class StudentList {
             System.out.println("-------------------------------------------------------------------------");
         }
     }
-
+// ------------------done statistics----------------------------------------------
 }
