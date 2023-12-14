@@ -46,33 +46,45 @@ public class DanhSachCauHoi implements DuyetDS , File{
 		
 	}
 	public void docFile(String nameFile) {
-		try (FileReader file = new FileReader(nameFile); 
-	            BufferedReader buffer = new BufferedReader(file)) {
-	                 n = 0;
-	                 ch = new CauHoi[1];
-	                 String []data = new String[7];
-	                 String line = buffer.readLine();
-	                 while (true){
-	                     data[0] = buffer.readLine();
-	                     System.out.println(data[0]);
-	                     if (data[0] == null)
-	                         break;
-	                     n++;
-	                     ch = Arrays.copyOf(ch, n);
-	                     data[1] = buffer.readLine();
-	                     data[2] = buffer.readLine();
-	                     data[3] = buffer.readLine();
-	                     data[4] = buffer.readLine();
-	                     data[5] = buffer.readLine();
-	                     data[6] = buffer.readLine();
-	                     ch[n-1] = new CauHoi(data[0], data[1], data[2], data[3], data[4], data[5],data[6]);
-	                 }
-	                buffer.close();
-	                file.close();
-	        } catch (IOException ex) {
-	            System.out.println("Loi khi mo File!");
-	        }
+		try (FileReader file = new FileReader(nameFile);
+				BufferedReader buffer = new BufferedReader(file)) {
+	
+			n = 0; // Assuming n is a variable to keep track of the number of questions
+			ch = new CauHoi[1]; // Assuming ch is an array to store CauHoi objects
+	
+			String[] data = new String[7]; // Array to store data for each question
+	
+			String line = buffer.readLine(); // Read the first line (assuming it's not used)
+	
+			while (true) {
+				data[0] = buffer.readLine(); // Read the question text
+				//System.out.println(data[0]); // Print the question text
+	
+				if (data[0] == null)
+					break; // Exit the loop if there is no more data
+	
+				n++; // Increment the number of questions
+				ch = Arrays.copyOf(ch, n); // Resize the array to accommodate the new question
+	
+				// Read data for the question (assuming there are 6 more lines of data)
+				data[1] = buffer.readLine();
+				data[2] = buffer.readLine();
+				data[3] = buffer.readLine();
+				data[4] = buffer.readLine();
+				data[5] = buffer.readLine();
+				data[6] = buffer.readLine();
+	
+				// Create a new CauHoi object and store it in the array
+				ch[n - 1] = new CauHoi(data[0], data[1], data[2], data[3], data[4], data[5], data[6]);
+			}
+	
+			buffer.close();
+			file.close();
+		} catch (IOException ex) {
+			System.out.println("Loi khi mo File!");
+		}
 	}
+	
 	@Override
 	public void ghiFile() {
 	}
@@ -81,6 +93,7 @@ public class DanhSachCauHoi implements DuyetDS , File{
 			FileWriter file = new FileWriter(nameFile);
 			BufferedWriter buffer = new BufferedWriter(file);
 			buffer.write("Số lượng câu hỏi:" + n);
+			buffer.newLine();
 			for(CauHoi s : ch) {
 				buffer.write(s.getIdCau());
 				buffer.newLine();
@@ -163,18 +176,74 @@ public class DanhSachCauHoi implements DuyetDS , File{
 	@Override
 	public void xuatDS() {
 		for(int i = 0 ; i < n ; i++) {
+			System.out.print("Câu hỏi:" +(i+1));
 			ch[i].xuat();
 		}
 		
 	}
-
-	 void XuatCauHoiTheoViTri(int index){
+    public int TimKiemTheoID(String ID){
+		for(int i = 0 ; i < this.getN(); i++) {
+			if(ch[i].getIdCau().equals(ID)) {
+              return 1;
+			}
+		}
+		return -1;
+	}
+	public void XuatCauHoiTheoViTri(int index){
 			this.ch[index].xuat(); 
 	}
+	public void XoaPhanTuTheoViTri(int index){
+		for(int i = index; i < n - 1; i++){
+            ch[i] = ch[i + 1] ;
+		}
+		n--;
+		ch = Arrays.copyOf(ch, n);
+	}
+	public void ThemPhanTuTheoViTri(int index){
+		if(index < 0){
+			index = 0;
+		}
+		if(index >= n) {
+		   index = n;
+		}
+		n++;
+		ch = Arrays.copyOf(ch, n);
+		ch[n - 1] = new CauHoi();
+		for(int i = n - 1 ; i > index; i--){
+			this.ch[i] = this.ch[i-1];
+		}
+		ch[index] = new CauHoi();
+		this.ch[index].nhap();
+	}
+    public void SuaPhanTuTheoViTri(int index){
+		ch[index] = new CauHoi();
+        this.ch[index].nhap();
+	}
 	
-	 public static void main(String[] args) {
-		DanhSachCauHoi dsch = new DanhSachCauHoi();
-		dsch.docFile("danhsachcauhoi");
-		dsch.xuatDS();
+	public void XoaPhanTuTheoID(String ID){
+		for(int i = 0; i < n; i++){
+			if(TimKiemTheoID(ID) == 1) {
+				for(int j = i; j < n - 1; j++){
+                ch[j] = ch[j + 1] ;
+		        }
+		        n--;
+				System.out.println("Xóa Câu Hỏi Thành Công!");
+				return;
+			} 
+		}
+		System.out.println("Câu Hỏi Không Có Trong Danh Sách");
+		return;
+	}
+	public void SuaPhanTuTheoID(String ID){
+		for(int i = 0; i < n; i++){
+			if(TimKiemTheoID(ID) == 1) {
+				ch[i] = new CauHoi();
+                this.ch[i].nhap();
+				System.out.println("Chỉnh Sửa Câu Hỏi Thành Công!");
+				return;
+			} 
+		}
+		System.out.println("Câu Hỏi Không Có Trong Danh Sách");
+		return;
 	}
 }

@@ -87,6 +87,7 @@ do{
     	MenuSinhVien();
     }
     
+    
     public static void CapNhatThongTinSinhVien() {
     	DSSV.updateId(id);
     	clearScreen();
@@ -119,6 +120,236 @@ do{
         }
          System.out.println("Khong Hop Le Moi Nhap Lai");
         }
+    }
+    public static void DanhSachMonHoc() {
+        Scanner scanner = new Scanner(System.in);
+        int option;
+        while (true) {
+        System.out.println("=======================================================");
+        System.out.println("Danh Sách Môn Học Bạn Muốn Xuất Ra Là:");
+        System.out.println("1.Danh Sách Môn Cấu Trúc Rời Rạc");
+        System.out.println("2.Danh Sách Môn Triết Học");
+        System.out.println("3.Danh Sách Môn Xác Xuất Thống Kê");
+        System.out.println("4.Quay Lại");
+        System.out.println("5.Trở Về Trang chủ");
+        option = scanner.nextInt();
+        if(option == 1){
+            DSCH.docFile("CauTrucRoiRac.txt");
+            DSCH.xuatDS();
+        } 
+        else if(option == 2){
+            DSCH.docFile("TrietHoc.txt");
+            DSCH.xuatDS();
+        } 
+        else if(option == 3){
+           DSCH.docFile("XacXuatThongKe.txt");
+           DSCH.xuatDS();
+        } 
+        else if(option == 4){
+            menuAdmin();
+        } 
+        else if(option == 5){
+            menuAdmin();
+        }
+        else {
+            System.out.println("Lựa Chọn Của Bạn Không Hợp Lệ Vui Lòng Nhập Lại !!!");
+        }
+    }
+    }
+    public static void ThayDoiNoiDungDanhSach(){
+        Scanner scanner = new Scanner(System.in);
+        int option;
+        while (true) {
+        System.out.println("=======================================================");
+        System.out.println("Danh Sách Môn Học Bạn Muốn Thay Đổi Là:");
+        System.out.println("1.Danh Sách Môn Cấu Trúc Rời Rạc");
+        System.out.println("2.Danh Sách Môn Triết Học");
+        System.out.println("3.Danh Sách Môn Xác Xuất Thống Kê");
+        System.out.println("4.Quay Lại");
+        System.out.println("5.Trở Về Trang chủ");
+        option = scanner.nextInt();
+        if(option == 1){
+            DSCH.docFile("CauTrucRoiRac.txt");
+            PhuongThucCapNhat("CauTrucRoiRac.txt");
+            ThayDoiNoiDungDanhSach();
+        } 
+        else if(option == 2){
+            DSCH.docFile("TrietHoc.txt");
+            PhuongThucCapNhat("TrietHoc.txt");
+            ThayDoiNoiDungDanhSach();
+        } 
+        else if(option == 3){
+           DSCH.docFile("XacXuatThongKe.txt");
+           PhuongThucCapNhat("XacXuatThongKe.txt");
+           ThayDoiNoiDungDanhSach();
+        } 
+        else if(option == 4){
+            menuAdmin();
+        } 
+        else if(option == 5){
+            menuAdmin();
+        }
+        else {
+            System.out.println("Lựa Chọn Của Bạn Không Hợp Lệ Vui Lòng Nhập Lại !!!");
+        }
+    }
+    }
+    public static void CapNhatDanhSachTheoViTri(String document) {
+        Scanner scanner = new Scanner(System.in);
+        int option;
+        while(true){
+            System.out.println("======================================================");
+            System.out.println("Nhập Lựa Chọn Thay Đổi Danh Sách Của Bạn");
+            System.out.println("1.Tôi Muốn Thêm Câu Hỏi Vào Danh Sách");
+            System.out.println("2.Tôi Muốn Xóa Câu Hỏi Khỏi Danh Sách");
+            System.out.println("3.Tôi Muốn Thay Đổi Câu Hỏi Trong Sách");
+            System.out.println("4.Quay Lại");
+            System.out.println("5.Trở Về Trang chủ");
+            option = scanner.nextInt();
+        if(option == 1){
+             ThemCauHoi();
+             DSCH.ghiFile(document);
+             CapNhatDanhSachTheoViTri(document);
+        } 
+        else if(option == 2){
+            XoaCauHoi();
+            DSCH.ghiFile(document);
+            CapNhatDanhSachTheoViTri(document);
+        } 
+        else if(option == 3){
+            SuaCauHoi();
+            DSCH.ghiFile(document);
+            CapNhatDanhSachTheoViTri(document);
+        } 
+        else if(option == 4){
+            PhuongThucCapNhat(document);
+        } 
+        else if(option == 5){
+             menuAdmin();
+        }else{
+            System.out.println("Lựa Chọn Của Bạn Không Hợp Lệ Vui Lòng Nhập Lại !!!");
+        }
+        }
+    }
+    public static void CapNhatDanhSachTheoID(String document){
+        Scanner scanner = new Scanner(System.in);
+        int option;
+        while(true){
+            System.out.println("======================================================");
+            System.out.println("Nhập Lựa Chọn Thay Đổi Danh Sách Của Bạn");
+            System.out.println("1.Tôi Muốn Thêm Câu Hỏi Vào Danh Sách");
+            System.out.println("2.Tôi Muốn Xóa Câu Hỏi Khỏi Danh Sách");
+            System.out.println("3.Tôi Muốn Thay Đổi Câu Hỏi Trong Sách");
+            System.out.println("4.Quay Lại");
+            System.out.println("5.Trở Về Trang chủ");
+            option = scanner.nextInt();
+            scanner.nextLine();
+        if(option == 1){
+            ThemCauHoi();
+            DSCH.ghiFile(document);
+            CapNhatDanhSachTheoID(document);
+        } 
+        else if(option == 2){
+            System.out.println("Mời Nhập ID Câu Hỏi Cần Xóa");
+            String ID = scanner.nextLine();
+            DSCH.XoaPhanTuTheoID(ID);
+            DSCH.ghiFile(document);
+            CapNhatDanhSachTheoID(document);
+    
+        } 
+        else if(option == 3){
+            System.out.println("Mời Nhập ID Câu Hỏi Cần Chỉnh Sửa");
+            String ID = scanner.nextLine();
+            DSCH.SuaPhanTuTheoID(ID);
+            DSCH.ghiFile(document);
+            CapNhatDanhSachTheoID(document);
+        } 
+        else if(option == 4){
+            PhuongThucCapNhat(document);
+        } 
+        else if(option == 5){
+             menuAdmin();
+        }else{
+            System.out.println("Lựa Chọn Của Bạn Không Hợp Lệ Vui Lòng Nhập Lại !!!");
+        }
+        }
+    }
+    public static void PhuongThucCapNhat(String document){
+        Scanner scanner = new Scanner(System.in);
+        int option;
+        while (true) {
+             System.out.println("====================================================================");
+             System.out.println("1.Phương Thức Cập Nhật Theo ID Câu Hỏi");
+             System.out.println("2.Phương Thức Cập Nhật Theo Vị Trí Câu Hỏi");
+             System.out.println("3.Quay Lại");
+             System.out.println("4.Trở Về Trang Chủ");
+             option = scanner.nextInt();
+             if (option == 1) {
+                CapNhatDanhSachTheoID(document);
+                PhuongThucCapNhat(document);
+             } else if(option == 2) {
+                CapNhatDanhSachTheoViTri(document);
+                PhuongThucCapNhat(document);
+             } else if (option == 3) {
+                ThayDoiNoiDungDanhSach();
+             } else if(option == 4) {
+                menuAdmin();
+             } else {
+                System.out.println("Lựa Chọn Không Hợp Lệ !!!");
+             }
+        }
+    }
+    public static void ThemCauHoi(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Số Lượng Câu Hỏi Cần Thêm:");
+        int number = scanner.nextInt();
+        for(int i = 0; i < number; i++) {   
+            System.out.println("Xin Mời Nhập Vị Trí Cần Thêm Câu Hỏi Vào Danh Sách");
+            System.out.println("Vị Trí Thứ : " );
+            int index = scanner.nextInt();
+            DSCH.ThemPhanTuTheoViTri(index - 1);
+        }
+        System.out.println("Thêm Câu Hỏi Thành Công !");
+    }
+    public static void XoaCauHoi(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Số Lượng Câu Hỏi Cần Xóa:");
+        int number = scanner.nextInt();
+        int starIndex[] = new int[number];
+        for(int i = 0; i < number; i++) {
+            System.out.println("Xin Mời Nhập Vị Trí Cần Xóa Câu Hỏi Vào Danh Sách");
+            System.out.println("Vị Trí Thứ :");
+            starIndex[i] = RangBuocViTri();
+            if(i > 0 && starIndex[i] == (starIndex[i-1] + 1)){
+                starIndex[i] = starIndex[i-1];
+            }
+        }
+        for(int i = 0; i < number;i++) {
+             DSCH.XoaPhanTuTheoViTri(starIndex[i] - 1);
+        }
+            System.out.println("Xóa Câu Hỏi Thành Công !");
+    }
+    public static void SuaCauHoi(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Số Lượng Câu Hỏi Cần Thay Đổi:");
+        int number = scanner.nextInt();
+        for(int i = 0; i < number; i++) {
+            System.out.println("Xin Mời Nhập Vị Trí Cần Sửa Câu Hỏi Vào Danh Sách");
+            System.out.println("Vị Trí Thứ :");
+            int index = RangBuocViTri();
+            DSCH.SuaPhanTuTheoViTri(index - 1);
+        }
+        System.out.println("Sửa Câu Hỏi Thành Công !!!!");
+    }
+    public static int RangBuocViTri(){
+        Scanner scanner = new Scanner(System.in);
+        int index;
+        index = scanner.nextInt();
+        if(index <= 0 || index > DSCH.getN()) {
+            System.out.println("Vị Trí Câu Hỏi Không Hợp Lệ Xin Nhập Lại !!!");
+            return RangBuocViTri();
+        }
+        return index;
     }
     
     public static void updateCauhoi() {
@@ -215,13 +446,12 @@ do{
             	DSGV.xuatDS();
             	menuAdmin();
            } else if(option == 3){
-             System.out.println("Danh sách câu hỏi");
-             DSCH.docFile("Hoahoc.txt");
-             DSCH.xuatDS();
+             DanhSachMonHoc();
+             menuAdmin();
             menuAdmin();
            }  else if(option == 4) {
         	System.out.println("Cập nhật danh sách câu hỏi");
-        		updateCauhoi();
+        		ThayDoiNoiDungDanhSach();
         	}
        			else if(option == 5) {
         	System.out.println("Cập nhật danh sách học sinh");

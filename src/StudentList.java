@@ -79,7 +79,7 @@ public class StudentList {
     public void searchId(int n) {
     	for(int i = 0 ; i < this.n ; i++) {
     		if(n == i) {
-    			System.out.println("Student " + (i + 1) + ":");
+    			System.out.println("Student " + i   + ":");
                 Student st = this.StudentArray[i];
                 System.out.println("\tid: " + st.getId());
                 System.out.println("\tFaculty: " + st.getFaculty());
