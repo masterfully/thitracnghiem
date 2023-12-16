@@ -255,6 +255,18 @@ public class StudentList {
                 break;
         }
         results.printList();
+        System.out.println("Do you want to search students continuously?");
+        System.out.println("1. Yes");
+        System.out.println("2. No");
+        System.out.print("You choose: ");
+        int option1 = Integer.parseInt(scanner.nextLine());
+        switch (option1) {
+            case 1:
+                results.searchStudents();
+                break;
+            case 2:
+                return;
+        }
     }
 
     public StudentList searchStudentsById(String id) {
